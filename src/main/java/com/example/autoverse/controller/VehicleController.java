@@ -4,8 +4,12 @@ import com.example.autoverse.dto.VehicleDTO;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/vehicles")
+@RequestMapping("/vehicles")
 public class VehicleController {
+    @GetMapping
+    public String getAllVehicles(){
+        return "Vehicles";
+    }
 
     @GetMapping("/brand/{brand}")
     public String getVehicleBrand(@PathVariable String brand) {
