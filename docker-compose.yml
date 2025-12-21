@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16
+    container_name: autoverse_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: autoverse_db
+      POSTGRES_USER: autoverse_user
+      POSTGRES_PASSWORD: secret123
+    ports:
+      - "5432:5432"
+    volumes:
+      - autoverse_postgres_data:/var/lib/postgresql/data
+    networks:
+      - autoverse_network
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: autoverse_pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@autoverse.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "5050:80"
+    volumes:
+      - autoverse_pgadmin_data:/var/lib/pgadmin
+    networks:
+      - autoverse_network
+    depends_on:
+      - db
+
+volumes:
+  autoverse_postgres_data:
+  autoverse_pgadmin_data:
+
+networks:
+  autoverse_network:
+    driver: bridge
