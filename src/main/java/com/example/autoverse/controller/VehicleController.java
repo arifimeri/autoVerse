@@ -10,7 +10,6 @@ public class VehicleController {
     public String getAllVehicles(){
         return "Vehicles";
     }
-
     @GetMapping("/brand/{brand}")
     public String getVehicleBrand(@PathVariable String brand) {
         return "The vehicle brand is " + brand;
