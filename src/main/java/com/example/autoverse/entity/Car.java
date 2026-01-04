@@ -1,10 +1,8 @@
 package com.example.autoverse.entity;
 
 import com.example.autoverse.enums.CarBodyType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,8 +19,13 @@ public class Car extends Vehicle{
     @Enumerated(EnumType.STRING)
     private CarBodyType bodyType;
 
+    @Min(1)
     private Integer numberOfDoors;
+
+    @Column(name = "engine_capacity", nullable = false)
+    @Min(1)
     private Integer engineCapacity;
+
+    @Column(nullable = false)
     private Integer kw;
-    private Boolean foldingMirror;
 }

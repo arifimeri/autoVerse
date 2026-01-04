@@ -1,10 +1,8 @@
 package com.example.autoverse.entity;
 
 import com.example.autoverse.enums.MotorcycleType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +19,9 @@ public class Motorcycle extends Vehicle{
     @Enumerated(EnumType.STRING)
     private MotorcycleType motorcycleType;
 
+    @Column(name="engine_capacity", nullable=false)
+    @Min(50)
     private Integer engineCapacity;
+
     private Boolean abs;
 }

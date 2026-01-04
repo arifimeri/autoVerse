@@ -16,11 +16,13 @@ public class VehicleModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable=false)
     private String name;
 
     @Enumerated(EnumType.STRING)
     private VehicleCategory vehicleCategory;
 
     @ManyToOne
+    @JoinColumn(name="brand_id", nullable=false)
     private Brand brand;
 }

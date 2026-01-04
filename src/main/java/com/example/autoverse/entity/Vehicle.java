@@ -17,6 +17,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.ManyToOne;
 
+@Table(name = "vehicles")
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter
@@ -51,7 +52,7 @@ public abstract class Vehicle {
     private FuelType fuelType;
 
     @Enumerated(EnumType.STRING)
-    private VehicleCondition VehicleCondition;
+    private VehicleCondition vehicleCondition;
 
     private Long mileage;
     private Integer previousOwners;
