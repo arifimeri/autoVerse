@@ -1,6 +1,5 @@
 package com.example.autoverse.controller;
 
-import com.example.autoverse.dto.VehicleDTO;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,8 +29,8 @@ public class VehicleController {
         return "The vehicle type is " + type;
     }
 
-    @PostMapping("/vehicle")
-    public VehicleDTO createVehicle(@RequestBody VehicleDTO vehicle) {
-        return vehicle;
-    }
+//    @PostMapping("/vehicle")
+//    public VehicleDTO createVehicle(@RequestBody VehicleDTO vehicle) {
+//        return vehicle;
+//    }
 }

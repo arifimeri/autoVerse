@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,4 +26,7 @@ public class Location {
     @Column(nullable = false)
     @NotBlank
     private String city;
+
+    @OneToMany(mappedBy = "location")
+    private List<Vehicle> vehicles;
 }

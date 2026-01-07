@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "brands")
 @Getter
@@ -22,4 +24,10 @@ public class Brand {
     @NotBlank
     @Column(unique = true, nullable = false)
     private String name;
+
+    @OneToMany(mappedBy = "brand")
+    private List<Vehicle> vehicles;
+
+    @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL)
+    private List<VehicleModel> models;
 }

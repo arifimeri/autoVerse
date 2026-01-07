@@ -1,28 +1,33 @@
-package com.example.autoverse.entity;
+    package com.example.autoverse.entity;
 
-import com.example.autoverse.enums.VehicleCategory;
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+    import com.example.autoverse.enums.VehicleCategory;
+    import jakarta.persistence.*;
+    import lombok.Getter;
+    import lombok.Setter;
 
-@Entity
-@Table(name = "vehicle_models")
-@Getter
-@Setter
+    import java.util.List;
 
-public class VehicleModel {
+    @Entity
+    @Table(name = "vehicle_models")
+    @Getter
+    @Setter
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public class VehicleModel {
 
-    @Column(nullable=false)
-    private String name;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private VehicleCategory vehicleCategory;
+        @Column(nullable=false)
+        private String name;
 
-    @ManyToOne
-    @JoinColumn(name="brand_id", nullable=false)
-    private Brand brand;
-}
+        @Enumerated(EnumType.STRING)
+        private VehicleCategory vehicleCategory;
+
+        @ManyToOne
+        @JoinColumn(name="brand_id", nullable=false)
+        private Brand brand;
+
+        @OneToMany(mappedBy = "model")
+        private List<Vehicle> vehicles;
+    }

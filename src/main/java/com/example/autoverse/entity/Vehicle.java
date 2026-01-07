@@ -1,52 +1,54 @@
 package com.example.autoverse.entity;
 
-import java.math.BigDecimal;
-import java.util.List;
 import com.example.autoverse.enums.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.ManyToOne;
+import java.math.BigDecimal;
+import java.util.List;
 
-@Table(name = "vehicles")
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "vehicles")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class Vehicle {
+public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "owner_id", nullable = false)
+    private User owner;
+
+    @ManyToOne
+    @JoinColumn(name = "brand_id", nullable = false)
     private Brand brand;
 
     @ManyToOne
+    @JoinColumn(name = "model_id", nullable = false)
     private VehicleModel model;
 
-    @Enumerated(EnumType.STRING)
-    private VehicleCategory category;
+    @ManyToOne
+    @JoinColumn(name = "location_id", nullable = false)
+    private Location location;
 
-    @Enumerated(EnumType.STRING)
-    private ServiceStatus serviceStatus;
+    @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<VehicleImage> images;
 
     private Integer year;
+    private Integer mileage;
     private BigDecimal price;
     private String color;
 
     @Enumerated(EnumType.STRING)
-    private TransmissionType transmission;
+    private VehicleCategory vehicleCategory;
+
+    @Enumerated(EnumType.STRING)
+    private TransmissionType transmissionType;
 
     @Enumerated(EnumType.STRING)
     private FuelType fuelType;
@@ -54,19 +56,12 @@ public abstract class Vehicle {
     @Enumerated(EnumType.STRING)
     private VehicleCondition vehicleCondition;
 
-    private Long mileage;
-    private Integer previousOwners;
-
-    @Column(length = 1000)
-    private String description;
+    @Enumerated(EnumType.STRING)
+    private VehicleStatus vehicleStatus;
 
     @Enumerated(EnumType.STRING)
-    private VehicleStatus status;
+    private ServiceStatus serviceStatus;
 
-    @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL)
-    private List<VehicleImage> images;
+    private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "location_id")
-    private Location location;
 }
